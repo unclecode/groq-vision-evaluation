@@ -1,4 +1,4 @@
-# Comprehensive Vision Model Comparison Report: LLaVA 1.5 7B (Groq) vs GPT-4-vision-mini (OpenAI)
+#  Vision Model Comparison Report: LLaVA 1.5 7B (Groq) vs GPT-4-vision-mini (OpenAI)
 
 ## 1. Introduction and Objectives
 
@@ -115,7 +115,7 @@ This scatter plot provides a crucial insight into the trade-off between speed an
 
 ![Overall Comparison Parallel Coordinates](assets/overall_comparison_parallel.png)
 
-The parallel coordinates plot offers a comprehensive view of how the models compare across all metrics. It visualizes the trade-offs between speed and various performance aspects, highlighting Groq's superior speed and OpenAI's slight edge in accuracy and completeness.
+The parallel coordinates plot offers a  view of how the models compare across all metrics. It visualizes the trade-offs between speed and various performance aspects, highlighting Groq's superior speed and OpenAI's slight edge in accuracy and completeness.
 
 ### 3.5 Time Savings
 
@@ -136,7 +136,7 @@ This area chart illustrates the cumulative time savings achieved by using Groq's
 
 ## 5. Conclusion
 
-This comprehensive comparison between Groq's LLaVA 1.5 7B model running on their custom LPU and OpenAI's GPT-4-vision-mini yields several important insights:
+This  comparison between Groq's LLaVA 1.5 7B model running on their custom LPU and OpenAI's GPT-4-vision-mini yields several important insights:
 
 1. **Speed**: Groq's model demonstrates a clear and significant advantage in processing speed, with an average response time of 1.54 seconds compared to OpenAI's 6.27 seconds. This represents a speed improvement of approximately 4x.
 
