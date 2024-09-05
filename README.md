@@ -1,15 +1,15 @@
-#  Vision Model Comparison Report: LLaVA 1.5 7B (Groq) vs GPT-4-vision-mini (OpenAI)
+#  Vision Model Comparison Report: LLaVA 1.5 7B (Groq) vs GPT-4o-mini (OpenAI)
 
 ## 1. Introduction and Objectives
 
 This report presents a detailed comparison between two state-of-the-art vision models:
 1. LLaVA 1.5 7B, provided by Groq and running on their custom Language Processing Unit (LPU)
-2. GPT-4-vision-mini, provided by OpenAI
+2. GPT-4o-mini, provided by OpenAI
 
 The primary objectives of this comparison are:
 
 1. To evaluate the performance of Groq's LPU in terms of processing speed for vision tasks.
-2. To assess the quality and accuracy of the LLaVA 1.5 7B model compared to GPT-4-vision-mini.
+2. To assess the quality and accuracy of the LLaVA 1.5 7B model compared to GPT-4o-mini.
 3. To determine if the potential loss in accuracy is outweighed by the significant speed improvements offered by the LPU.
 
 Our goal is to provide insights into whether an open-source model like LLaVA 1.5 7B, when coupled with specialized hardware like the LPU, can serve as a viable and efficient alternative to larger, more resource-intensive models in scenarios where ultra-high accuracy is not critical.
@@ -125,7 +125,7 @@ This area chart illustrates the cumulative time savings achieved by using Groq's
 
 ## 4. Summary Statistics
 
-| Metric       | Groq (LLaVA 1.5-7b)   | OpenAI (GPT-4-vision-mini) |
+| Metric       | Groq (LLaVA 1.5-7b)   | OpenAI (GPT-4o-mini) |
 |:-------------|:----------------------|:---------------------------|
 | Time         | 1.54 ± 0.58           | 6.27 ± 2.88                |
 | Accuracy     | 6.00 ± 1.35           | 8.50 ± 1.00                |
@@ -136,7 +136,7 @@ This area chart illustrates the cumulative time savings achieved by using Groq's
 
 ## 5. Conclusion
 
-This  comparison between Groq's LLaVA 1.5 7B model running on their custom LPU and OpenAI's GPT-4-vision-mini yields several important insights:
+This  comparison between Groq's LLaVA 1.5 7B model running on their custom LPU and OpenAI's GPT-4o-mini yields several important insights:
 
 1. **Speed**: Groq's model demonstrates a clear and significant advantage in processing speed, with an average response time of 1.54 seconds compared to OpenAI's 6.27 seconds. This represents a speed improvement of approximately 4x.
 
