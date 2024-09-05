@@ -1,0 +1,7 @@
+groq
+openai
+anthropic
+pandas
+matplotlib
+seaborn
+plotly
