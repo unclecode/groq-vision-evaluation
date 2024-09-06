@@ -189,7 +189,7 @@ def efficiency_scatter(df):
     fig.update_layout(title='Efficiency Comparison')
     fig.write_image(__location__ + "/report/images/efficiency_scatter.png")
 
-def model_size_performance_bar():
+def model_size_performance_bar(df):
     # Assuming model sizes
     model_sizes = {'Groq (LLaVA)': 7, 'OpenAI': 175}  # in billions
     avg_scores = {'Groq (LLaVA)': df['Groq_Total'].mean(), 'OpenAI': df['OpenAI_Total'].mean()}

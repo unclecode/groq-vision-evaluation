@@ -1,8 +1,9 @@
-#  Vision Model Comparison Report: LLaVA 1.5 7B (Groq) vs GPT-4o-mini (OpenAI)
+# Vision Model Comparison Report: LLaVA 1.5 7B (Groq) vs GPT-4o-mini (OpenAI)
 
 ## 1. Introduction and Objectives
 
 This report presents a detailed comparison between two state-of-the-art vision models:
+
 1. LLaVA 1.5 7B, provided by Groq and running on their custom Language Processing Unit (LPU)
 2. GPT-4o-mini, provided by OpenAI
 
@@ -20,21 +21,22 @@ Our goal is to provide insights into whether an open-source model like LLaVA 1.5
 
 We used FLUX-Schnell to generate four diverse images to test various aspects of the models' capabilities:
 
-| ![Complex Street Scene](assets/complex_street_small.png) | ![Abstract Painting](assets/abstract_painting.png) |
-|:------------------------------------------------------:|:------------------------------------------------:|
-|                  Complex Street Scene                  |                 Abstract Painting                |
-| ![Technical Diagram](assets/technical_diagram.png)       | ![Natural Landscape](assets/natural_landscape.png) |
-|                   Technical Diagram                    |                 Natural Landscape                |
+| ![Complex Street Scene](assets/complex_street_small_1.png) | ![Abstract Painting](assets/abstract_painting.png) |
+| :------------------------------------------------------: | :------------------------------------------------: |
+|                   Complex Street Scene                   |                 Abstract Painting                  |
+|              ![Receipt](assets/receipt.jpeg)              | ![Natural Landscape](assets/natural_landscape.png) |
+|                         Receipt                          |                 Natural Landscape                  |
 
 These images were chosen to evaluate the models' performance across different scenarios:
+
 1. **Complex Street Scene**: Tests object detection and scene understanding in urban environments.
 2. **Abstract Painting**: Evaluates interpretation of non-representational art and color analysis.
-3. **Technical Diagram**: Assesses comprehension of structured, schematic information.
+3. **Receipt**: Assesses OCR capabilities and information extraction from structured documents.
 4. **Natural Landscape**: Examines detection of subtle details and understanding of natural scenes.
 
 ### 2.2 Prompts and Ground Truths
 
-For each image, we prepared multiple prompts using the judge LLM (Claude 3.5 Sonnet) to test different aspects of the models' performance. Here's the detailed breakdown:
+For each image, we prepared multiple prompts using the judge LLM (Claude 3.5 Sonnet) to test different aspects of the models' performance. The prompts were designed to evaluate various capabilities, including detailed description, counting, emotion interpretation, and information extraction.
 
 ```json
 {
@@ -54,13 +56,13 @@ For each image, we prepared multiple prompts using the judge LLM (Claude 3.5 Son
             "Can you identify any hidden shapes or figures in the painting?"
         ]
     },
-    "assets/technical_diagram.png": {
-        "ground_truth": "Flowchart of software development lifecycle with 6 main stages: Planning, Analysis, Design, Implementation, Testing, and Maintenance",
+    "assets/receipt.jpeg": {  
+        "ground_truth": "Sales receipt from Cider Cellar showing 2 items (Bulmers Original Bottle and Bulmers Pear Bottle) each priced at £4.00, with discounts applied, resulting in a total of £4.50",
         "prompts": [
-            "What process does this diagram represent?",
-            "How many main stages are there in this process?",
-            "What's the relationship between the different elements in the diagram?"
-        ]
+            "What is the name of the business on this receipt?",
+            "List the items purchased and their individual prices.",
+            "What is the total amount paid, and were any discounts applied?",
+        ],
     },
     "assets/natural_landscape.png": {
         "ground_truth": "Forest scene with 3 hidden animals: a deer, an owl, and a fox. Dense foliage with a small stream running through.",
@@ -78,11 +80,11 @@ For each image, we prepared multiple prompts using the judge LLM (Claude 3.5 Son
 1. **Image Encoding**: Each image was encoded to base64 format.
 2. **Model Querying**: Both models were queried with each prompt for each image.
 3. **Response Timing**: The time taken for each model to generate a response was recorded.
-4. **Response Evaluation**: Claude 3.5 Sonnet, a highly capable language model, was used as an impartial judge to evaluate the responses based on four criteria:
-   - Accuracy (0-10): How well the response aligns with the ground truth
-   - Completeness (0-10): How thoroughly the response addresses all aspects of the prompt
-   - Relevance (0-10): How relevant the response is to the given prompt
-   - Insight (0-10): Whether the response provides unique or insightful observations
+4. **Response Evaluation**: Claude 3.5 Sonnet was used as an impartial judge to evaluate the responses based on four criteria:
+    - Accuracy (0-10): How well the response aligns with the ground truth
+    - Completeness (0-10): How thoroughly the response addresses all aspects of the prompt
+    - Relevance (0-10): How relevant the response is to the given prompt
+    - Insight (0-10): Whether the response provides unique or insightful observations
 5. **Data Collection**: All results, including response times and evaluation scores, were collected and saved to a CSV file.
 
 ## 3. Results and Analysis
@@ -90,32 +92,32 @@ For each image, we prepared multiple prompts using the judge LLM (Claude 3.5 Son
 ### 3.1 Speed Comparison
 
 | ![Speed Comparison Bar Chart](assets/speed_comparison_bar.png) | ![Speed Comparison Box Plot](assets/speed_comparison_box.png) |
-|:--------------------------------------------------------------:|:-------------------------------------------------------------:|
-|                    Speed Comparison Bar Chart                  |                   Speed Comparison Box Plot                   |
+| :------------------------------------------------------------: | :-----------------------------------------------------------: |
+|                   Speed Comparison Bar Chart                   |                   Speed Comparison Box Plot                   |
 
 ![Speed Scatter Plot](assets/speed_scatter.png)
 
-The speed comparison clearly shows that the Groq LPU consistently outperforms OpenAI's model in terms of response time. The bar chart and box plot illustrate the significant difference in processing speed, with Groq's model responding much faster across all tests.
+The speed comparison clearly shows that the Groq LPU consistently outperforms OpenAI's model in terms of response time. Groq's model demonstrates a significant speed advantage, with an average response time of 1.61 seconds compared to OpenAI's 4.26 seconds, representing a speed improvement of approximately 2.6x.
 
 ### 3.2 Performance Metrics
 
 | ![Performance Radar Chart](assets/performance_radar.png) | ![Performance Grouped Bar Chart](assets/performance_grouped_bar.png) |
-|:--------------------------------------------------------:|:---------------------------------------------------------------------:|
-|                  Performance Radar Chart                 |                    Performance Grouped Bar Chart                      |
+| :------------------------------------------------------: | :------------------------------------------------------------------: |
+|                 Performance Radar Chart                  |                    Performance Grouped Bar Chart                     |
 
-The performance metrics show that while OpenAI's model generally scores higher across all evaluation criteria, the difference is not as substantial as the speed difference. The radar chart demonstrates that both models perform well in terms of relevance and completeness, with OpenAI having a slight edge in accuracy and insight.
+The performance metrics show that while OpenAI's model generally scores higher across all evaluation criteria, the difference is not as substantial as the speed difference. Both models perform well in terms of relevance and completeness, with OpenAI having an edge in accuracy.
 
 ### 3.3 Speed vs Performance
 
 ![Speed vs Performance Scatter Plot](assets/performance_vs_speed_scatter.png)
 
-This scatter plot provides a crucial insight into the trade-off between speed and performance. While OpenAI's model achieves slightly higher total scores, it does so at the cost of significantly longer processing times. Groq's model, on the other hand, delivers competitive performance scores with much faster response times.
+This scatter plot provides a crucial insight into the trade-off between speed and performance. While OpenAI's model achieves higher total scores, it does so at the cost of longer processing times. Groq's model delivers competitive performance scores with much faster response times.
 
 ### 3.4 Overall Comparison
 
 ![Overall Comparison Parallel Coordinates](assets/overall_comparison_parallel.png)
 
-The parallel coordinates plot offers a  view of how the models compare across all metrics. It visualizes the trade-offs between speed and various performance aspects, highlighting Groq's superior speed and OpenAI's slight edge in accuracy and completeness.
+The parallel coordinates plot offers a comprehensive view of how the models compare across all metrics. It visualizes the trade-offs between speed and various performance aspects, highlighting Groq's superior speed and OpenAI's edge in accuracy and completeness.
 
 ### 3.5 Time Savings
 
@@ -125,28 +127,30 @@ This area chart illustrates the cumulative time savings achieved by using Groq's
 
 ## 4. Summary Statistics
 
-| Metric       | Groq (LLaVA 1.5-7b)   | OpenAI (GPT-4o-mini) |
-|:-------------|:----------------------|:---------------------------|
-| Time         | 1.54 ± 0.58           | 6.27 ± 2.88                |
-| Accuracy     | 6.00 ± 1.35           | 8.50 ± 1.00                |
-| Completeness | 7.17 ± 1.27           | 8.75 ± 0.97                |
-| Relevance    | 8.50 ± 0.90           | 9.83 ± 0.58                |
-| Insight      | 6.17 ± 1.70           | 7.58 ± 1.44                |
+| Metric       | Groq (LLaVA 1.5-7b) | OpenAI (GPT-4o-mini) |
+| :----------- | :------------------ | :------------------- |
+| Time         | 1.61 ± 0.30         | 4.26 ± 1.27          |
+| Accuracy     | 5.08 ± 2.23         | 8.25 ± 2.01          |
+| Completeness | 7.08 ± 1.44         | 8.67 ± 1.50          |
+| Relevance    | 8.17 ± 1.34         | 9.50 ± 0.80          |
+| Insight      | 5.08 ± 2.87         | 6.58 ± 2.78          |
 
 ## 5. Conclusion
 
-This  comparison between Groq's LLaVA 1.5 7B model running on their custom LPU and OpenAI's GPT-4o-mini yields several important insights:
+This comprehensive comparison between Groq's LLaVA 1.5 7B model running on their custom LPU and OpenAI's GPT-4o-mini yields several important insights:
 
-1. **Speed**: Groq's model demonstrates a clear and significant advantage in processing speed, with an average response time of 1.54 seconds compared to OpenAI's 6.27 seconds. This represents a speed improvement of approximately 4x.
+1. **Speed**: Groq's model demonstrates a clear and significant advantage in processing speed, with an average response time 2.6 times faster than OpenAI's model. This speed improvement is crucial for real-time applications and large-scale deployments.
 
-2. **Accuracy and Quality**: While OpenAI's model shows slightly higher scores across all evaluation metrics, the difference is relatively small. 
+2. **Accuracy and Quality**: While OpenAI's model shows higher scores across all evaluation metrics, the difference is relatively small in most areas. However, it's important to note that the LLaVA model showed some weakness in OCR capabilities, particularly when reading detailed information from the receipt image.
 
-3. **Efficiency vs. Accuracy Trade-off**: The minimal loss in accuracy (about 19.7% lower total score) is offset by the substantial gain in speed (75.4% faster). This trade-off could be highly favorable in many real-world applications where rapid response times are crucial.
+3. **Efficiency vs. Accuracy Trade-off**: The loss in accuracy is offset by the substantial gain in speed. This trade-off could be highly favorable in many real-world applications where rapid response times are crucial and slight accuracy losses are acceptable.
 
 4. **Scalability**: The time savings chart clearly illustrates that as the number of queries increases, the cumulative time saved by using Groq's model becomes increasingly significant. This could translate to substantial efficiency gains and cost savings in large-scale deployments.
 
-5. **Consistency**: Both models show relatively low standard deviations across all metrics, indicating consistent performance across different types of images and prompts.
+5. **Consistency**: Both models show relatively consistent performance across different types of images and prompts, with some variance in accuracy and insight metrics.
 
-In conclusion, the use of an open-source model like LLaVA 1.5 7B, when paired with specialized hardware like Groq's LPU, presents a compelling alternative to larger, more resource-intensive models. While there is a small trade-off in terms of accuracy and insight, the massive gain in processing speed makes this solution highly attractive for a wide range of applications where real-time or near-real-time processing is essential.
+In conclusion, the use of an open-source model like LLaVA 1.5 7B, when paired with specialized hardware like Groq's LPU, presents a compelling alternative to larger, more resource-intensive models. While there is a trade-off in terms of accuracy, particularly in OCR tasks, the massive gain in processing speed makes this solution highly attractive for a wide range of applications where real-time or near-real-time processing is essential.
 
-This comparison demonstrates that in scenarios where ultra-high accuracy is not critical, the combination of LLaVA 1.5 7B and Groq's LPU can provide a balance of speed and quality that may be preferable to slower, albeit slightly more accurate, alternatives. As AI continues to be integrated into more real-time applications, solutions that offer this balance of speed and accuracy will likely become increasingly valuable.
+It's important to note that the current limitations in OCR capabilities for the LLaVA model do not diminish the significant advantages in speed offered by the Groq LPU. As Groq continues to develop and potentially host larger or more specialized models, we can expect to see improvements in accuracy while maintaining the speed advantage. This could lead to a solution that combines both high speed and high accuracy, making it an even more attractive option for a broader range of applications.
+
+This comparison demonstrates that in scenarios where ultra-high accuracy is not critical, or where the speed-accuracy trade-off favors faster processing, the combination of LLaVA 1.5 7B and Groq's LPU can provide a balance of speed and quality that may be preferable to slower, albeit slightly more accurate, alternatives. As AI continues to be integrated into more real-time applications, solutions that offer this balance of speed and accuracy will likely become increasingly valuable.
