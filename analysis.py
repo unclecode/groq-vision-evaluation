@@ -127,7 +127,6 @@ def performance_vs_speed_scatter(df):
     plt.savefig(__location__ + '/report/images/performance_vs_speed_scatter.png')
     plt.close()
 
-
 def improved_overall_comparison(df):
     # Calculate mean scores for each metric
     metrics = ['Time', 'Accuracy', 'Completeness', 'Relevance', 'Insight', 'Total']
@@ -173,7 +172,6 @@ def improved_overall_comparison(df):
     plt.tight_layout()
     plt.savefig(__location__ + "/report/images/overall_comparison_parallel.png")
     plt.close()
-
 
 def efficiency_scatter(df):
     fig = px.scatter(df, x='Groq_Time', y='Groq_Total', color='Image',
@@ -258,7 +256,7 @@ This report compares the performance of Groq and OpenAI vision models across var
     # Create a new summary table
     markdown += "\n\n## Metric Comparison (Mean ± Std)\n\n"
     
-    metrics = ['Time', 'Accuracy', 'Completeness', 'Relevance', 'Insight', 'Total']
+    metrics = ['Time', 'Accuracy', 'Completeness', 'Relevance', 'Insight'] #, 'Total']
     summary_data = []
 
     for metric in metrics:

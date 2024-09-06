@@ -34,7 +34,7 @@ These images were chosen to evaluate the models' performance across different sc
 
 ### 2.2 Prompts and Ground Truths
 
-For each image, we prepared multiple prompts to test different aspects of the models' performance. Here's the detailed breakdown:
+For each image, we prepared multiple prompts using the judge LLM (Claude 3.5 Sonnet) to test different aspects of the models' performance. Here's the detailed breakdown:
 
 ```json
 {
@@ -140,7 +140,7 @@ This  comparison between Groq's LLaVA 1.5 7B model running on their custom LPU a
 
 1. **Speed**: Groq's model demonstrates a clear and significant advantage in processing speed, with an average response time of 1.54 seconds compared to OpenAI's 6.27 seconds. This represents a speed improvement of approximately 4x.
 
-2. **Accuracy and Quality**: While OpenAI's model shows slightly higher scores across all evaluation metrics, the difference is relatively small. For instance, the total score difference is less than 7 points on a 40-point scale (34.67 vs 27.83).
+2. **Accuracy and Quality**: While OpenAI's model shows slightly higher scores across all evaluation metrics, the difference is relatively small. 
 
 3. **Efficiency vs. Accuracy Trade-off**: The minimal loss in accuracy (about 19.7% lower total score) is offset by the substantial gain in speed (75.4% faster). This trade-off could be highly favorable in many real-world applications where rapid response times are crucial.
 
