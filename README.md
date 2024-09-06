@@ -17,6 +17,65 @@ Our goal is to provide insights into whether an open-source model like LLaVA 1.5
 
 ## 2. Methodology
 
+```marmaid
+graph TD
+    A[Start] --> B[Use Claude to Generate Image Descriptions]
+    B --> C[Use Flux to Generate 3 Test Images]
+    C --> D[Add Receipt Image]
+    D --> E[Create 3 Prompts per Image]
+    E --> F[Initialize Image Counter]
+    F --> G{All Images Processed?}
+    G -->|No| H[Encode Current Image to Base64]
+    H --> I[Query Groq LLaVA 1.5 7B Model]
+    H --> J[Query OpenAI GPT-4o-mini Model]
+    I --> K[Record Groq Response Time]
+    J --> L[Record OpenAI Response Time]
+    K --> M[Collect Groq Responses]
+    L --> N[Collect OpenAI Responses]
+    M --> O[Use Claude to Evaluate Responses]
+    N --> O
+    O --> P[Score on Accuracy, Completeness, Relevance, and Insight]
+    P --> Q[Increment Image Counter]
+    Q --> G
+    G -->|Yes| R[Collect All Scores and Times]
+    R --> S[Calculate Performance Metrics]
+    S --> T[Generate Visualizations]
+    T --> U[Produce Final Comparison Report]
+    U --> V[End]
+
+    subgraph "Image Preparation"
+        B
+        C
+        D
+        E
+    end
+
+    subgraph "Model Querying Loop"
+        F
+        G
+        H
+        I
+        J
+        K
+        L
+        M
+        N
+        O
+        P
+        Q
+    end
+
+    subgraph "Data Analysis"
+        R
+        S
+        T
+    end
+
+    subgraph "Reporting"
+        U
+    end
+```
+
 ### 2.1 Test Images
 
 We used FLUX-Schnell to generate four diverse images to test various aspects of the models' capabilities:
