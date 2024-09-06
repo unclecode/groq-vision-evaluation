@@ -188,6 +188,53 @@ This area chart illustrates the cumulative time savings achieved by using Groq's
 | Relevance    | 8.17 ± 1.34         | 9.50 ± 0.80          |
 | Insight      | 5.08 ± 2.87         | 6.58 ± 2.78          |
 
+
+To better understand the consistency of each model's performance, we calculated the 95% confidence intervals for the response times.
+
+### Formula
+
+We use the standard formula for confidence interval:
+
+```
+CI = mean ± (1.96 * (standard_deviation / sqrt(sample_size)))
+```
+
+Where 1.96 is the z-score for a 95% confidence level.
+
+### Calculations
+
+Assuming a sample size of 12 (4 images * 3 prompts):
+
+#### Groq (LLaVA 1.5-7b)
+- Mean: 1.61 seconds
+- Standard Deviation: 0.30 seconds
+
+```
+CI = 1.61 ± (1.96 * (0.30 / sqrt(12)))
+   = 1.61 ± 0.17
+   = (1.44, 1.78)
+```
+
+#### OpenAI (GPT-4o-mini)
+- Mean: 4.26 seconds
+- Standard Deviation: 1.27 seconds
+
+```
+CI = 4.26 ± (1.96 * (1.27 / sqrt(12)))
+   = 4.26 ± 0.72
+   = (3.54, 4.98)
+```
+
+### Interpretation
+
+The confidence intervals show that:
+
+1. Groq's LPU has a much tighter confidence interval (1.44 to 1.78 seconds) compared to OpenAI's model (3.54 to 4.98 seconds).
+2. Even at the upper bound of its confidence interval, Groq's model is still faster than the lower bound of OpenAI's model.
+3. The narrower interval for Groq's model indicates more consistent performance, which is crucial for real-time applications.
+
+This analysis reinforces the conclusion that the LLaVA model running on Groq's LPU not only offers faster processing times but also more reliable and consistent performance.
+
 ## 5. Conclusion
 
 This comprehensive comparison between Groq's LLaVA 1.5 7B model running on their custom LPU and OpenAI's GPT-4o-mini yields several important insights:
