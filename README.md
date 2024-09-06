@@ -132,7 +132,6 @@ This area chart illustrates the cumulative time savings achieved by using Groq's
 | Completeness | 7.17 ± 1.27           | 8.75 ± 0.97                |
 | Relevance    | 8.50 ± 0.90           | 9.83 ± 0.58                |
 | Insight      | 6.17 ± 1.70           | 7.58 ± 1.44                |
-| Total        | 27.83 ± 4.28          | 34.67 ± 3.31               |
 
 ## 5. Conclusion
 
