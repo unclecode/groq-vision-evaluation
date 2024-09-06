@@ -17,7 +17,7 @@ Our goal is to provide insights into whether an open-source model like LLaVA 1.5
 
 ## 2. Methodology
 
-```marmaid
+```mermaid
 graph TD
     A[Start] --> B[Use Claude to Generate Image Descriptions]
     B --> C[Use Flux to Generate 3 Test Images]
