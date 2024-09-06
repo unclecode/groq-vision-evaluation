@@ -129,7 +129,7 @@ def performance_vs_speed_scatter(df):
 
 def improved_overall_comparison(df):
     # Calculate mean scores for each metric
-    metrics = ['Time', 'Accuracy', 'Completeness', 'Relevance', 'Insight', 'Total']
+    metrics = ['Time', 'Accuracy', 'Completeness', 'Relevance', 'Insight']
     groq_means = [df[f'Groq_{m}'].mean() for m in metrics]
     openai_means = [df[f'OpenAI_{m}'].mean() for m in metrics]
 

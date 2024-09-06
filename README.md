@@ -91,17 +91,17 @@ For each image, we prepared multiple prompts using the judge LLM (Claude 3.5 Son
 
 ### 3.1 Speed Comparison
 
-| ![Speed Comparison Bar Chart](assets/speed_comparison_bar.png) | ![Speed Comparison Box Plot](assets/speed_comparison_box.png) |
+| ![Speed Comparison Bar Chart](report/images/speed_comparison_bar.png) | ![Speed Comparison Box Plot](report/images/speed_comparison_box.png) |
 | :------------------------------------------------------------: | :-----------------------------------------------------------: |
 |                   Speed Comparison Bar Chart                   |                   Speed Comparison Box Plot                   |
 
-![Speed Scatter Plot](assets/speed_scatter.png)
+![Speed Scatter Plot](report/images/speed_scatter.png)
 
 The speed comparison clearly shows that the Groq LPU consistently outperforms OpenAI's model in terms of response time. Groq's model demonstrates a significant speed advantage, with an average response time of 1.61 seconds compared to OpenAI's 4.26 seconds, representing a speed improvement of approximately 2.6x.
 
 ### 3.2 Performance Metrics
 
-| ![Performance Radar Chart](assets/performance_radar.png) | ![Performance Grouped Bar Chart](assets/performance_grouped_bar.png) |
+| ![Performance Radar Chart](report/images/performance_radar.png) | ![Performance Grouped Bar Chart](report/images/performance_grouped_bar.png) |
 | :------------------------------------------------------: | :------------------------------------------------------------------: |
 |                 Performance Radar Chart                  |                    Performance Grouped Bar Chart                     |
 
@@ -109,19 +109,19 @@ The performance metrics show that while OpenAI's model generally scores higher a
 
 ### 3.3 Speed vs Performance
 
-![Speed vs Performance Scatter Plot](assets/performance_vs_speed_scatter.png)
+![Speed vs Performance Scatter Plot](report/images/performance_vs_speed_scatter.png)
 
 This scatter plot provides a crucial insight into the trade-off between speed and performance. While OpenAI's model achieves higher total scores, it does so at the cost of longer processing times. Groq's model delivers competitive performance scores with much faster response times.
 
 ### 3.4 Overall Comparison
 
-![Overall Comparison Parallel Coordinates](assets/overall_comparison_parallel.png)
+![Overall Comparison Parallel Coordinates](report/images/overall_comparison_parallel.png)
 
 The parallel coordinates plot offers a comprehensive view of how the models compare across all metrics. It visualizes the trade-offs between speed and various performance aspects, highlighting Groq's superior speed and OpenAI's edge in accuracy and completeness.
 
 ### 3.5 Time Savings
 
-![Time Savings Area Chart](assets/time_savings_area.png)
+![Time Savings Area Chart](report/images/time_savings_area.png)
 
 This area chart illustrates the cumulative time savings achieved by using Groq's model. As the number of queries increases, the time saved becomes increasingly significant, demonstrating the potential efficiency gains in large-scale applications.
 
