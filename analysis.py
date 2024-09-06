@@ -17,8 +17,13 @@ def speed_comparison_bar(df):
     plt.figure(figsize=(15, 8))
     x = range(len(df))
     width = 0.35
-    plt.bar(x, df['Groq_Time'], width, label='Groq', color='blue', alpha=0.7)
-    plt.bar([i + width for i in x], df['OpenAI_Time'], width, label='OpenAI', color='green', alpha=0.7)
+    
+    # Groq bars in #f55036
+    plt.bar(x, df['Groq_Time'], width, label='Groq', color='#f55036', alpha=1)
+    
+    # OpenAI bars in black
+    plt.bar([i + width for i in x], df['OpenAI_Time'], width, label='OpenAI', color='black', alpha=1)
+    
     plt.xlabel('Image-Prompt Combination')
     plt.ylabel('Response Time (s)')
     plt.title('Speed Comparison: Groq vs OpenAI')
@@ -58,13 +63,17 @@ def performance_radar(df):
             r=[row[f'Groq_{m}'] for m in metrics],
             theta=metrics,
             fill='toself',
-            name=f'Groq - {index}'
+            name=f'Llava - {index}',
+            line=dict(color='#f55036'),  # Set Groq color to #f55036
+            fillcolor='rgba(245, 80, 54, 0.3)'  # Set fill color to semi-transparent #f55036
         ))
         fig.add_trace(go.Scatterpolar(
             r=[row[f'OpenAI_{m}'] for m in metrics],
             theta=metrics,
             fill='toself',
-            name=f'OpenAI - {index}'
+            name=f'OpenAI - {index}',
+            line=dict(color='black'),  # Set OpenAI color to black
+            fillcolor='rgba(0, 0, 0, 0.1)'  # Set fill color to semi-transparent black
         ))
 
     # Add legend to figure
@@ -82,8 +91,8 @@ def performance_grouped_bar(df):
     openai_means = [df[f'OpenAI_{m}'].mean() for m in metrics]
 
     fig = go.Figure(data=[
-        go.Bar(name='Groq', x=metrics, y=groq_means, marker_color='blue'),
-        go.Bar(name='OpenAI', x=metrics, y=openai_means, marker_color='green')
+        go.Bar(name='Llava-1.5-7b', x=metrics, y=groq_means, marker_color='blue'),
+        go.Bar(name='GPT-4o-mini', x=metrics, y=openai_means, marker_color='black')
     ])
 
     fig.update_layout(
@@ -103,11 +112,11 @@ def performance_vs_speed_scatter(df):
     
     # Plot Groq data
     plt.scatter(df['Groq_Total'], df['Groq_Time'], 
-                color='orange', label='Groq', alpha=0.7)
+                color='#f55036', label='Groq', alpha=1)
     
     # Plot OpenAI data
     plt.scatter(df['OpenAI_Total'], df['OpenAI_Time'], 
-                color='blue', label='OpenAI', alpha=0.7)
+                color='blue', label='OpenAI', alpha=1)
     
     plt.xlabel('Total Score (Performance/Accuracy)')
     plt.ylabel('Response Time (seconds)')
@@ -136,13 +145,13 @@ def improved_overall_comparison(df):
     # Create a new dataframe for the heatmap
     heatmap_data = pd.DataFrame({
         'Metric': metrics,
-        'Groq': groq_means,
-        'OpenAI': openai_means
+        'Llava-1.5-7b': groq_means,
+        'GPT-4o-mini': openai_means
     })
     heatmap_data = heatmap_data.set_index('Metric')
 
     # Calculate the difference (OpenAI - Groq)
-    heatmap_data['Difference'] = heatmap_data['OpenAI'] - heatmap_data['Groq']
+    heatmap_data['Difference'] = heatmap_data['GPT-4o-mini'] - heatmap_data['Llava-1.5-7b']
 
     # Create the plot
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 8))
@@ -150,8 +159,8 @@ def improved_overall_comparison(df):
     # Grouped bar chart
     x = range(len(metrics))
     width = 0.35
-    ax1.bar([i - width/2 for i in x], groq_means, width, label='Groq', color='blue', alpha=0.7)
-    ax1.bar([i + width/2 for i in x], openai_means, width, label='OpenAI', color='green', alpha=0.7)
+    ax1.bar([i - width/2 for i in x], groq_means, width, label='Llava-1.5-7b', color='#f55036', alpha=1)
+    ax1.bar([i + width/2 for i in x], openai_means, width, label='GPT-4o-mini', color='black', alpha=1)
 
     ax1.set_ylabel('Scores')
     ax1.set_title('Overall Comparison: Groq vs OpenAI')
@@ -167,7 +176,7 @@ def improved_overall_comparison(df):
 
     # Heatmap for the difference
     sns.heatmap(heatmap_data[['Difference']], ax=ax2, cmap='RdYlGn', center=0, annot=True, fmt='.2f')
-    ax2.set_title('Difference (OpenAI - Groq)')
+    ax2.set_title('Difference (GPT-4o-mini - Llava-1.5-7b)')
 
     plt.tight_layout()
     plt.savefig(__location__ + "/report/images/overall_comparison_parallel.png")
@@ -219,10 +228,32 @@ def time_savings_area(df):
 
     fig = go.Figure()
     x_values = list(range(len(df)))  # Convert range to a list
-    fig.add_trace(go.Scatter(x=x_values, y=cumulative_groq, fill='tozeroy', name='Groq'))
-    fig.add_trace(go.Scatter(x=x_values, y=cumulative_openai, fill='tonexty', name='OpenAI'))
+    
+    # Groq area in orange
+    fig.add_trace(go.Scatter(
+        x=x_values, 
+        y=cumulative_groq, 
+        fill='tozeroy', 
+        name='Groq',
+        line_color='#f55036',
+        fillcolor='rgba(245, 80, 54, 0.3)'  # Semi-transparent orange
+    ))
+    
+    # OpenAI area in black
+    fig.add_trace(go.Scatter(
+        x=x_values, 
+        y=cumulative_openai, 
+        fill='tonexty', 
+        name='OpenAI',
+        line_color='black',
+        fillcolor='rgba(0, 0, 0, 0.1)'  # Semi-transparent black
+    ))
 
-    fig.update_layout(title='Cumulative Time Savings', xaxis_title='Number of Queries', yaxis_title='Cumulative Time (s)')
+    fig.update_layout(
+        title='Cumulative Time Savings', 
+        xaxis_title='Number of Queries', 
+        yaxis_title='Cumulative Time (s)'
+    )
     fig.write_image(__location__ + "/report/images/time_savings_area.png")
 
 def generate_markdown_report(df, report_name='vision_model_comparison'):
@@ -239,9 +270,6 @@ This report compares the performance of Groq and OpenAI vision models across var
 ## Performance Metrics
 ![Performance Radar Chart](images/performance_radar.png)
 ![Performance Grouped Bar Chart](images/performance_grouped_bar.png)
-
-## Speed vs Performance
-![Speed vs Performance Scatter Plot](images/performance_vs_speed_scatter.png)
 
 ## Overall Comparison
 ![Overall Comparison Parallel Coordinates](images/overall_comparison_parallel.png)

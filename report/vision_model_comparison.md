@@ -12,9 +12,6 @@ This report compares the performance of Groq and OpenAI vision models across var
 ![Performance Radar Chart](images/performance_radar.png)
 ![Performance Grouped Bar Chart](images/performance_grouped_bar.png)
 
-## Speed vs Performance
-![Speed vs Performance Scatter Plot](images/performance_vs_speed_scatter.png)
-
 ## Overall Comparison
 ![Overall Comparison Parallel Coordinates](images/overall_comparison_parallel.png)
 
