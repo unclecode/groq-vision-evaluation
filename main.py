@@ -133,20 +133,20 @@ if __name__ == "__main__":
     report_name = "vision_model_comparison"
     results = {}
 
-    # total = 12
-    # ix = 1
-    # for image, data in image_data.items():
-    #     image_results = []
-    #     for prompt in data["prompts"]:
-    #         print(
-    #             f"[LOG] Process case {ix}/{total}, Image: {image}, Prompt: {prompt[:50]}..."
-    #         )
-    #         result = compare_models(image, prompt, data["ground_truth"])
-    #         image_results.append(result)
-    #         ix += 1
-    #     results[image] = image_results
+    total = 12
+    ix = 1
+    for image, data in image_data.items():
+        image_results = []
+        for prompt in data["prompts"]:
+            print(
+                f"[LOG] Process case {ix}/{total}, Image: {image}, Prompt: {prompt[:50]}..."
+            )
+            result = compare_models(image, prompt, data["ground_truth"])
+            image_results.append(result)
+            ix += 1
+        results[image] = image_results
 
-    # save_results_to_csv(results, report_name=report_name)
+    save_results_to_csv(results, report_name=report_name)
 
     df = load_data(report_name=report_name)
 
